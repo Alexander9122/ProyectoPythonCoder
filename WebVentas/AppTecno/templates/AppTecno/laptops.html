@@ -10,7 +10,24 @@
 {%endblock%}
 
 {%block contenido%}
+    
+    {% if fomularioLaptop.errors %}
 
-    <h1>Prueba herencia</h1>
+    <p style="color: red;">ERROR</p>
+
+    {%endif%}
+
+    <form action="/AppTecno/laptops", method="post">{% csrf_token %}
+
+        
+        <table>
+
+        {{ formularioLaptop.as_table }}
+        
+        </table>
+        
+        <input type="submit" value="Registro">
+
+    </form>
 
 {%endblock%}
