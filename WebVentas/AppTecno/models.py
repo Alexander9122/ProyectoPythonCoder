@@ -9,6 +9,10 @@ class Laptops(models.Model):
     ram = models.CharField(max_length=5)
     precio = models.FloatField()
 
+    def __str__(self):
+
+        return f"MARCA: {self.marca} PULGADAS: {self.pulgadas} PROCESADOR: {self.procesador} RAM: {self.ram} PRECIO:{self.precio}"
+
 class Celulares(models.Model):
 
     marca = models.CharField(max_length=10)
@@ -17,9 +21,17 @@ class Celulares(models.Model):
     memoria = models.CharField (max_length=6)
     precio = models.FloatField ()
 
+    def __str__(self):
+
+        return f"MARCA: {self.marca} COMPANIA: {self.compania} CONECTIVIDAD: {self.conectividad} MEMORIA: {self.memoria} PRECIO:{self.precio}"
+
 class Televisores(models.Model):
     
     marca = models.CharField(max_length=10)
     pulgadas = models.IntegerField()
     resolusion = models.CharField(max_length=10)
     precio = models.FloatField()
+
+    def __str__(self):
+
+        return f"MARCA: {self.marca} PULGADAS: {self.pulgadas} RESOLUCION: {self.resolusion} PRECIO:{self.precio}"
