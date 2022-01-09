@@ -1,0 +1,52 @@
+{%extends "AppInicio/base.html"%}
+
+{%load static%}
+
+{%block menu%}
+
+<li><a class="dropdown-item" href="{% url 'LeerLaptops' %}">Laptops</a></li>
+<li><a class="dropdown-item" href="{% url 'LeerCelulares' %}">Celulares</a></li>
+<li><a class="dropdown-item" href="{% url 'LeerTelevisores' %}">Televisores</a></li>
+
+{%endblock%}
+
+{%block head%}
+
+<h1 class="display-4 fw-bolder">Laptops</h1>
+<p class="lead fw-normal text-white-50 mb-0">Registrar, Leer, Editar y Eliminar</p>
+
+{%endblock%}
+
+{%block contenido%}
+    <form action="/AppTecno/buscarLaptop/" method="GET">
+        <input type="text" name="marca" id="marca">
+
+        <input type="submit" value="Busqueda Por Marca">
+    </form>
+    <h3>
+        <button type="button" class="btn btn-link">
+
+        <a href="{% url 'LaptopRegistro' %}">Nuevo Registro</a>
+
+        </button>
+    </h3>
+    {% for l in laptops %}
+
+        <li>{{l}}</li>
+
+        <button>
+
+            <a href="{% url 'ModificarLaptop' l.id %}">Editar</a>
+
+        </button>
+        
+        <button>
+
+            <a href="{% url 'ModificarLaptop' l.id %}">Editar</a>
+
+        </button>
+
+
+    {% endfor %}
+    
+{%endblock%}

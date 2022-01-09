@@ -11,7 +11,7 @@ class Laptops(models.Model):
 
     def __str__(self):
 
-        return f"MARCA: {self.marca} PULGADAS: {self.pulgadas} PROCESADOR: {self.procesador} RAM: {self.ram} PRECIO:{self.precio}"
+        return f"MARCA: {self.marca} PULGADAS: {self.pulgadas} PROCESADOR: {self.procesador} RAM: {self.ram} PRECIO: {self.precio}"
 
 class Celulares(models.Model):
 
