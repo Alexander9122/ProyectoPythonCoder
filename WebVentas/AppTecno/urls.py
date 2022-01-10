@@ -1,6 +1,7 @@
 from django.urls import path
 from AppTecno import views
 
+
 urlpatterns = [
 
 path('tecnologia', views.tecnologia, name="Tecnologia"),
@@ -17,4 +18,15 @@ path('televisoresRegistro',views.televisoresRegistro, name="TelevisoresRegistro"
 path('leerTelevisores',views.leerTelevisores,name="LeerTelevisores"),
 path('eliminarTelevisor/<numero_para_borrar>/',views.eliminaTelevisor,name="EliminarTelevisor"),
 path('buscarTelevisor/', views.buscarTelevisor),
+
+#CLASES
+path('laptops',views.Laptoplist.as_view(),name='Laptops'),
+path(r'^nuevo$', views.LaptopCreacion.as_view(), name='New'),
+path(r'^editar/(?P<pk>\d+)$', views.LaptopModificar.as_view(), name='Edit'),
+path(r'^borrar/(?P<pk>\d+)$', views.LaptopEliminar.as_view(), name='Delete'),
+
+#LOGIN
+path('login',views.login_request, name='Login'),
+path('registro',views.register, name='Registro'),
+
 ]

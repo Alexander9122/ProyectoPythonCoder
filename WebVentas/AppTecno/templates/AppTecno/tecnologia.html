@@ -5,7 +5,7 @@
 {%block menu%}
 
 
-<li><a class="dropdown-item" href="{% url 'LeerLaptops' %}">Laptops</a></li>
+<li><a class="dropdown-item" href="{% url 'Laptops' %}">Laptops</a></li>
 <li><a class="dropdown-item" href="{% url 'LeerCelulares' %}">Celulares</a></li>
 <li><a class="dropdown-item" href="{% url 'LeerTelevisores' %}">Televisores</a></li>
 
@@ -20,6 +20,6 @@
 
 {%block contenido%}
 
-   
+   <h3>{{mensaje}}   </h3>
 
 {%endblock%}

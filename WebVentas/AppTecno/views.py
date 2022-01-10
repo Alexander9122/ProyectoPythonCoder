@@ -1,10 +1,104 @@
+from django.db.models import fields
 from django.db.models.fields import NullBooleanField
 from django.shortcuts import render
 from django.http import HttpResponse
 from AppTecno.models import *
 from AppTecno.forms import *
 
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
+
 # Create your views here.
+#login 
+
+def login_request(request):
+
+    if request.method == "POST":
+
+        form = AuthenticationForm(request, data = request.POST)
+
+        if form.is_valid():
+
+            usuario = form.cleaned_data.get('username')
+            contra = form.cleaned_data.get('password')
+
+            user = authenticate(username = usuario, password = contra)
+
+            if user is not None:
+
+                login(request, user)
+
+                return render(request, "AppTecno/tecnologia.html", {"mensaje": f"Bienvenido {usuario}"})
+            
+            else:
+                
+                return render(request, "AppTecno/tecnologia.html", {"mensaje":"Error, datos incorrectos"})
+        
+        else:
+
+            return render(request, "AppTecno/tecnologia.html", {"mensaje":"Error, fromulario erroneo"})
+    
+    form = AuthenticationForm()
+
+    return render(request, "AppTecno/login.html", {'form':form})
+
+def register(request):
+
+    if request.method == 'POST':
+
+        form=UserRegisterForm(request.POST)
+
+        if form.is_valid():
+
+            username = form.cleaned_data['username']
+            form.save()
+            return render(request,"AppTecno/tecnologia.html", {"mensaje":"Usuario Creado"})
+        
+    else:
+
+        form=UserRegisterForm()
+        
+    return render(request,"AppTecno/registro.html", {"form":form})
+
+#CRUD CBV
+#leer
+class Laptoplist(ListView):
+
+    model = Laptops
+    template_name = "AppTecno/laptop_list.html"
+
+#detalle
+class LaptopDetalle(DetailView):
+
+    model= Laptops
+    template_name="AppTecno/laptop_detalle.html"
+
+#crear
+class LaptopCreacion(CreateView):
+
+    model= Laptops
+    success_url="/AppTecno/laptops"
+    template_name="AppTecno/laptops_form_insert.html"
+    fields = ['marca','pulgadas', 'procesador', 'ram', 'precio']
+
+#Editar 
+class LaptopModificar(UpdateView):
+
+    model=Laptops
+    success_url="../laptops"
+    fields = ["marca","pulgadas", "procesador", "ram", "precio"]
+
+#Eliminar
+class LaptopEliminar(DeleteView):
+
+    model=Laptops
+    success_url="../laptops"
+
+#proceso largo
 def tecnologia(request):
 
     return render (request, 'AppTecno/tecnologia.html')
